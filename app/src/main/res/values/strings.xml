@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name" translatable="false">TestJob</string>
+    <string name="input_bank_bin">Input card number</string>
+    <string name="search_history">Search history</string>
+</resources>
