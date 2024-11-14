@@ -5,8 +5,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
@@ -60,6 +65,16 @@ fun CardSearchScreen(
             },
             label = {
                 Text(text = stringResource(R.string.input_card_number))
+            },
+            trailingIcon = {
+                if (viewModel.text.isNotEmpty()) {
+                    IconButton(onClick = {
+                        viewModel.text = ""
+                    }) {
+                        Icon(imageVector = Icons.Filled.Clear, contentDescription = null)
+                    }
+                }
+
             },
             maxLines = 1,
             shape = RoundedCornerShape(8.dp),
@@ -174,11 +189,10 @@ fun CreateSnackbarHost(
 ) {
     SnackbarHost(snackbarHostState) { data ->
         Snackbar(
-            containerColor = Color.Red,
+            containerColor = MaterialTheme.colorScheme.error,
             modifier = modifier
         ) {
             Text(
-                color = Color.White,
                 modifier = Modifier.clip(RoundedCornerShape(8.dp)),
                 text = data.visuals.message
             )

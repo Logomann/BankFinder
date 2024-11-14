@@ -16,7 +16,12 @@
     <string name="bank_site">Bank site</string>
     <string name="bank_phone">Bank phone</string>
     <string name="bank_city">Bank city</string>
-    <string name="bank_info">Bank Info</string>
+    <string name="card_info">Card Info</string>
     <string name="coordinates">Coordinates</string>
     <string name="bank_bin">Bank BIN</string>
+    <string name="bin" translatable="false">BIN</string>
+    <string name="bank_name">Bank name</string>
+    <string name="clean_list">Clean list</string>
+    <string name="latitude">latitude</string>
+    <string name="longitude">longitude</string>
 </resources>

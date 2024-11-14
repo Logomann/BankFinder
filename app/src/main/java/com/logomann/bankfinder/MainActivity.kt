@@ -2,35 +2,40 @@ package com.logomann.bankfinder
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.logomann.bankfinder.ui.card.CardScreen
+import com.logomann.bankfinder.ui.card.CardInfoScreen
 import com.logomann.bankfinder.ui.card.CardSearchHistoryScreen
 import com.logomann.bankfinder.ui.card.CardSearchScreen
 import com.logomann.bankfinder.ui.screens.Screen
-import com.logomann.bankfinder.ui.theme.TestJobTheme
+import com.logomann.bankfinder.ui.theme.BankFinderTheme
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
+    val cardInfoArgumentKey = "cardId"
+
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             val navController = rememberNavController()
-            TestJobTheme {
+            BankFinderTheme(dynamicColor = false) {
                 Scaffold(
                     modifier = Modifier
                         .statusBarsPadding()
@@ -48,13 +53,16 @@ class MainActivity : ComponentActivity() {
                             CardSearchHistoryScreen(navController = navController)
                         }
                         composable(
-                            route = Screen.CardInfoScreen.route + "/{cardId}",
-                            arguments = listOf(navArgument("cardId") { type = NavType.IntType }),
-                        ) {stackEntry ->
-                            val cardId = stackEntry.arguments?.getInt("cardId")
-                            CardScreen(
+                            route = Screen.CardInfoScreen.route + "/{$cardInfoArgumentKey}",
+                            arguments = listOf(navArgument(cardInfoArgumentKey) {
+                                type = NavType.IntType
+                            }),
+                        ) { stackEntry ->
+                            val cardId = stackEntry.arguments?.getInt(cardInfoArgumentKey)
+                            CardInfoScreen(
                                 cardId = cardId,
-                                navController = navController)
+                                navController = navController
+                            )
                         }
                     }
                 }
@@ -67,7 +75,13 @@ class MainActivity : ComponentActivity() {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    TestJobTheme {
-        CardSearchScreen(rememberNavController())
+    BankFinderTheme {
+        Button(
+
+            onClick = {
+
+            }) {
+            Text(stringResource(R.string.search_history))
+        }
     }
 }

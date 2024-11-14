@@ -60,7 +60,7 @@ fun CardSearchHistoryScreen(
                 }
             )
             Row(
-                horizontalArrangement = Arrangement.SpaceEvenly,
+                horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier
                     .padding(horizontal = 16.dp)
                     .fillMaxWidth()
@@ -70,10 +70,8 @@ fun CardSearchHistoryScreen(
                         top.linkTo(topBar.bottom)
                     }
             ) {
-                Text(text = "BIN")
-                Text(text = "Bank name")
-                Text(text = "Network")
-                Text(text = "Country")
+                Text(text = stringResource(R.string.bin))
+                Text(text = stringResource(R.string.bank_name))
 
             }
             val btn = createRef()
@@ -88,7 +86,7 @@ fun CardSearchHistoryScreen(
             ) {
                 items(viewModel.listOfCards.size) { item ->
                     Row(
-                        horizontalArrangement = Arrangement.SpaceEvenly,
+                        horizontalArrangement = Arrangement.SpaceBetween,
                         modifier = Modifier
                             .padding(horizontal = 16.dp)
                             .fillMaxWidth()
@@ -106,29 +104,13 @@ fun CardSearchHistoryScreen(
                             text = viewModel.listOfCards[item].bankBin.toString()
                         )
                         Spacer(modifier = Modifier.width(4.dp))
-                        Spacer(modifier = Modifier.width(4.dp))
                         Text(
                             modifier = Modifier
-                                .weight(1f),
+                                .weight(2f),
+                            textAlign = TextAlign.End,
                             overflow = TextOverflow.Ellipsis,
                             maxLines = 1,
                             text = viewModel.listOfCards[item].bank?.name.toString()
-                        )
-
-                        Text(
-                            modifier = Modifier
-                                .weight(1f),
-                            textAlign = TextAlign.Center,
-                            text = viewModel.listOfCards[item].network.toString()
-                        )
-                        Spacer(modifier = Modifier.width(4.dp))
-
-                        Text(
-                            modifier = Modifier
-                                .weight(1f),
-                            overflow = TextOverflow.Ellipsis,
-                            maxLines = 1,
-                            text = viewModel.listOfCards[item].country?.name.toString()
                         )
 
                     }
@@ -150,9 +132,8 @@ fun CardSearchHistoryScreen(
                     viewModel.cleanList()
                     navController.navigateUp()
                 }) {
-                Text(text = "Clean list")
+                Text(text = stringResource(R.string.clean_list))
             }
         }
-
     }
 }

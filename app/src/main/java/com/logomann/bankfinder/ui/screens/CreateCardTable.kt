@@ -24,13 +24,17 @@ fun CreateCardTable(
     openLink: () -> Unit,
     callNumber: () -> Unit
 ) {
+    val coordinates = stringResource(R.string.coordinates)
+    val phone = stringResource(R.string.bank_phone)
+    val site = stringResource(R.string.bank_site)
+
     val dataMap = mapOf(
         stringResource(R.string.bank_bin) to card.bankBin,
         stringResource(R.string.network) to card.network,
         stringResource(R.string.type) to card.type,
         stringResource(R.string.bank) to card.bank?.name,
-        stringResource(R.string.bank_site) to card.bank?.url,
-        stringResource(R.string.bank_phone) to card.bank?.phone,
+        site to card.bank?.url,
+        phone to card.bank?.phone,
         stringResource(R.string.bank_city) to card.bank?.city,
         stringResource(R.string.brand) to card.brand,
         stringResource(R.string.prepaid) to card.prepaid,
@@ -38,13 +42,11 @@ fun CreateCardTable(
         stringResource(R.string.luhn) to card.number?.luhn,
         stringResource(R.string.country) to
                 "${card.country?.emoji} ${card.country?.name}",
-        stringResource(R.string.coordinates) to
-                "(latitude: ${card.country?.latitude}, " +
-                "longitude: ${card.country?.longitude})"
+        coordinates to
+                "${stringResource(R.string.latitude)}: ${card.country?.latitude}, " +
+                "${stringResource(R.string.longitude)}: ${card.country?.longitude}"
     )
-    val coordinates = stringResource(R.string.coordinates)
-    val phone = stringResource(R.string.bank_phone)
-    val site = stringResource(R.string.bank_site)
+
 
     LazyColumn(
         modifier = modifier

@@ -24,7 +24,7 @@ import org.koin.compose.koinInject
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 
-fun CardScreen(
+fun CardInfoScreen(
     cardId: Int?,
     navController: NavController,
     viewModel: CardScreenViewModel = koinInject<CardScreenViewModel>()
@@ -42,7 +42,7 @@ fun CardScreen(
                 CardScreenState.Default -> {}
                 is CardScreenState.Loaded -> {
                     TopAppBar(
-                        title = { Text(stringResource(R.string.bank_info)) },
+                        title = { Text(stringResource(R.string.card_info)) },
                         navigationIcon = {
                             IconButton(onClick = { navController.navigateUp() }) {
                                 Icon(

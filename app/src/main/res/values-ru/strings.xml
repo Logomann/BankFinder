@@ -16,7 +16,11 @@
     <string name="bank_site">Сайт банка</string>
     <string name="bank_phone">Телефон банка</string>
     <string name="bank_city">Город банка</string>
-    <string name="bank_info">Информация о банке></string>
+    <string name="card_info">Информация о карте></string>
     <string name="coordinates">Координаты</string>
     <string name="bank_bin">BIN банка</string>
+    <string name="bank_name">Название банка</string>
+    <string name="clean_list">Очистить список</string>
+    <string name="latitude">широта</string>
+    <string name="longitude">долгота</string>
 </resources>
