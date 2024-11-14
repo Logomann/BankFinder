@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "TestJob"
+rootProject.name = "BankFinder"
 include(":app")

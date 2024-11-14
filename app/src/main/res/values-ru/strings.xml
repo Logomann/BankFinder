@@ -1,5 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="input_bank_bin">Введите номер карты</string>
+    <string name="input_card_number">Введите номер карты</string>
     <string name="search_history">История поиска</string>
+    <string name="network">Сеть</string>
+    <string name="type">Тип</string>
+    <string name="bank">Банк</string>
+    <string name="brand">Бренд</string>
+    <string name="prepaid">Дебетовая</string>
+    <string name="card_number">Номер карты</string>
+    <string name="length">Длина</string>
+    <string name="luhn">LUHN</string>
+    <string name="country">Страна</string>
+    <string name="connection_error">Ошибка подключения</string>
+    <string name="no_such_bin_found">Банк не найден</string>
+    <string name="bank_site">Сайт банка</string>
+    <string name="bank_phone">Телефон банка</string>
+    <string name="bank_city">Город банка</string>
+    <string name="card_info">Информация о карте></string>
+    <string name="coordinates">Координаты</string>
+    <string name="bank_bin">BIN банка</string>
+    <string name="bank_name">Название банка</string>
+    <string name="clean_list">Очистить список</string>
+    <string name="latitude">широта</string>
+    <string name="longitude">долгота</string>
 </resources>

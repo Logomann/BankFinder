@@ -6,17 +6,18 @@ plugins {
 }
 
 android {
-    namespace = "com.logomann.testjob"
+    namespace = "com.logomann.bankfinder"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.logomann.testjob"
+        applicationId = "com.logomann.bankfinder"
         minSdk = 28
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
     }
 
     buildTypes {
@@ -57,6 +58,8 @@ dependencies {
     implementation(libs.androidx.constraintlayout.compose)
     implementation(libs.kotlinx.coroutines.android)
     ksp(libs.androidx.room.compiler)
+    implementation(libs.gson)
+    implementation(libs.converter.gson)
     implementation(libs.androidx.room.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
