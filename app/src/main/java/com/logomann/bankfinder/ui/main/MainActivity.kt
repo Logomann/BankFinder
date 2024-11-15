@@ -1,4 +1,4 @@
-package com.logomann.bankfinder
+package com.logomann.bankfinder.ui.main
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -20,6 +20,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.logomann.bankfinder.R
 import com.logomann.bankfinder.ui.card.CardInfoScreen
 import com.logomann.bankfinder.ui.card.CardSearchHistoryScreen
 import com.logomann.bankfinder.ui.card.CardSearchScreen
