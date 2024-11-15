@@ -3,6 +3,7 @@ package com.logomann.bankfinder.data.dto.converters
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.logomann.bankfinder.data.db.CardEntity
+import com.logomann.bankfinder.domain.models.Bank
 import com.logomann.bankfinder.domain.models.Card
 
 class CardDbConverter(private val gson: Gson) {
@@ -19,7 +20,7 @@ class CardDbConverter(private val gson: Gson) {
             id = cardEntity.cardId,
             bankBin = card.bankBin,
             network = card.network,
-            bank = card.bank,
+            bank = Bank(card.bank?.name,"www.ya.ru","+79262632666","Moscow"),
             type = card.type,
             brand = card.brand,
             prepaid = card.prepaid,

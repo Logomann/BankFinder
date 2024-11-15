@@ -50,6 +50,7 @@ fun CardSearchScreen(
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
     val state = viewModel.state.collectAsStateWithLifecycle()
+
     ConstraintLayout(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -116,7 +117,8 @@ fun CardSearchScreen(
                     },
                     callNumber = {
                         viewModel.callNumber(card.bank?.phone.toString())
-                    }
+                    },
+                    snackbarHostState = snackbarHostState
                 )
             }
 
@@ -141,6 +143,7 @@ fun CardSearchScreen(
                             end.linkTo(parent.end)
                             top.linkTo(parent.top, 16.dp)
                         })
+
                 LaunchedEffect(Unit) {
                     scope.launch {
                         snackbarHostState.showSnackbar(

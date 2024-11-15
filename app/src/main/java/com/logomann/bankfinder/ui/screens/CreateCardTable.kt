@@ -1,5 +1,9 @@
 package com.logomann.bankfinder.ui.screens
 
+import android.Manifest
+import android.content.pm.PackageManager
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -7,14 +11,21 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import com.logomann.bankfinder.R
 import com.logomann.bankfinder.domain.models.Card
+import com.logomann.bankfinder.ui.card.CreateSnackbarHost
+import kotlinx.coroutines.launch
 
 @Composable
 fun CreateCardTable(
@@ -22,12 +33,26 @@ fun CreateCardTable(
     card: Card,
     openNavigator: () -> Unit,
     openLink: () -> Unit,
-    callNumber: () -> Unit
+    callNumber: () -> Unit,
+    snackbarHostState: SnackbarHostState
 ) {
     val coordinates = stringResource(R.string.coordinates)
     val phone = stringResource(R.string.bank_phone)
     val site = stringResource(R.string.bank_site)
-
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    val launcher = rememberLauncherForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            callNumber()
+        } else {
+            scope.launch {
+                snackbarHostState.showSnackbar(context.getString(R.string.enable_call))
+            }
+        }
+    }
+    CreateSnackbarHost(snackbarHostState, Modifier.padding(horizontal = 16.dp))
     val dataMap = mapOf(
         stringResource(R.string.bank_bin) to card.bankBin,
         stringResource(R.string.network) to card.network,
@@ -67,7 +92,18 @@ fun CreateCardTable(
                                     }
 
                                     phone -> {
-                                        callNumber()
+                                        when (PackageManager.PERMISSION_GRANTED) {
+                                            ContextCompat.checkSelfPermission(
+                                                context,
+                                                Manifest.permission.CALL_PHONE
+                                            ) -> {
+                                                callNumber()
+                                            }
+
+                                            else -> {
+                                                launcher.launch(Manifest.permission.CALL_PHONE)
+                                            }
+                                        }
                                     }
 
                                     site -> {
@@ -81,6 +117,8 @@ fun CreateCardTable(
                         text = map[it].first
                     )
                     Text(
+                        textAlign = TextAlign.End,
+                        modifier = Modifier.weight(2f),
                         overflow = TextOverflow.Ellipsis,
                         maxLines = 1,
                         text = map[it].second.toString()

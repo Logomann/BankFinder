@@ -9,7 +9,11 @@ class ExternalNavigatorImpl(private val context: Context) : ExternalNavigator {
 
     override fun openLink(url: String) {
         val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse(url)
+        if (url.startsWith("http://") || url.startsWith("https://")) {
+            intent.data = Uri.parse(url)
+        } else {
+            intent.data = Uri.parse("http://$url")
+        }
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         context.startActivity(intent)
     }
