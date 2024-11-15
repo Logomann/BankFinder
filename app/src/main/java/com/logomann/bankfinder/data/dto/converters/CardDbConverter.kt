@@ -20,7 +20,7 @@ class CardDbConverter(private val gson: Gson) {
             id = cardEntity.cardId,
             bankBin = card.bankBin,
             network = card.network,
-            bank = Bank(card.bank?.name,"www.ya.ru","+79262632666","Moscow"),
+            bank = card.bank,
             type = card.type,
             brand = card.brand,
             prepaid = card.prepaid,
