@@ -23,4 +23,5 @@
     <string name="clean_list">Очистить список</string>
     <string name="latitude">широта</string>
     <string name="longitude">долгота</string>
+    <string name="enable_call">Разрешите звонки в настройках</string>
 </resources>

@@ -2,14 +2,17 @@ package com.logomann.bankfinder.ui.card
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -30,17 +33,27 @@ fun CardInfoScreen(
     viewModel: CardScreenViewModel = koinInject<CardScreenViewModel>()
 ) {
     val state = viewModel.state.collectAsStateWithLifecycle()
+    val snackbarHostState = remember { SnackbarHostState() }
     if (cardId != null) {
         viewModel.getCard(cardId)
         ConstraintLayout(
             modifier = Modifier.fillMaxSize()
         ) {
 
-            val (topBar, table) = createRefs()
+            val (topBar, table, snack) = createRefs()
+            CreateSnackbarHost(
+                snackbarHostState = snackbarHostState,
+                modifier = Modifier
+                    .padding(horizontal = 16.dp)
+                    .constrainAs(snack) {
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                        top.linkTo(parent.top, 16.dp)
+                    })
 
             when (state.value) {
-                CardScreenState.Default -> {}
-                is CardScreenState.Loaded -> {
+                CardInfoScreenState.Default -> {}
+                is CardInfoScreenState.Loaded -> {
                     TopAppBar(
                         title = { Text(stringResource(R.string.card_info)) },
                         navigationIcon = {
@@ -57,7 +70,7 @@ fun CardInfoScreen(
                             top.linkTo(parent.top)
                         }
                     )
-                    val card = (state.value as CardScreenState.Loaded).card
+                    val card = (state.value as CardInfoScreenState.Loaded).card
                     CreateCardTable(
                         card = card,
                         modifier = Modifier
@@ -80,7 +93,8 @@ fun CardInfoScreen(
                         },
                         callNumber = {
                             viewModel.callNumber(card.bank?.phone.toString())
-                        }
+                        },
+                        snackbarHostState = snackbarHostState
                     )
                 }
             }

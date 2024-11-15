@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         setContent {
             val navController = rememberNavController()
             BankFinderTheme(dynamicColor = false) {
+
                 Scaffold(
                     modifier = Modifier
                         .statusBarsPadding()
